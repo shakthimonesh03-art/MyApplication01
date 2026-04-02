@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ticketdb}
+    username: ${SPRING_DATASOURCE_USERNAME:ticket}
+    password: ${SPRING_DATASOURCE_PASSWORD:ticket}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+app:
+  jwt:
+    secret: ${APP_JWT_SECRET:change-me-to-at-least-32-characters-secret-key}
+
+server:
+  port: 8080
