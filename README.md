@@ -172,3 +172,26 @@ curl -s http://localhost:8080/api/events
 ## Phase 2+ (next)
 
 Coupons/offers, refunds, OpenSearch indexing, async notifications via Kafka, reporting dashboards, and real PDF/QR generation.
+
+---
+
+## Troubleshooting: container running but app not accessible
+
+If Docker Desktop shows container `app-1` running but you still feel app is not working, run these checks from the VM where Docker is installed:
+
+```bash
+docker compose ps
+curl -i http://localhost:8080/
+curl -i http://localhost:8080/api/health
+curl -i http://localhost:8080/api/events
+```
+
+Expected:
+- `/` returns service info JSON
+- `/api/health` returns `{"status":"UP"...}`
+- `/api/events` returns list/JSON (possibly empty list)
+
+If these work in VM but fail from your laptop/browser:
+- Access via VM public/private IP: `http://<VM_IP>:8080`
+- Open inbound firewall/security-group rule for TCP `8080`
+- Ensure no corporate proxy/VPN is blocking the port.
